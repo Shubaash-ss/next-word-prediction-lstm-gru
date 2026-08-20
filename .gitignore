@@ -1,0 +1,4 @@
+﻿venv/
+__pycache__/
+next_word_lstm.h5
+next_word_lstm_model_with_early_stopping.h5
