@@ -20,8 +20,10 @@ model.add(Dropout(0.2))
 model.add(LSTM(100))
 model.add(Dense(total_words, activation="softmax"))
 
-# Load only the trained weights
-model.load_weights("next_word_lstm.weights.h5")
+# Build the model so it has weight slots to fill, then load raw weights
+model.build(input_shape=(None, max_sequence_len - 1))
+weights = np.load("lstm_weights.npy", allow_pickle=True)
+model.set_weights(list(weights))
 
 # Function to predict the next word
 def predict_next_word(model, tokenizer, text, max_sequence_len):
